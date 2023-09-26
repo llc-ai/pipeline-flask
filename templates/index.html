@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js" integrity="sha512-tWHlutFnuG0C6nQRlpvrEhE4QpkG1nn2MOUMWmUeRePl4e3Aki0VB6W1v3oLjFtd0hVOtRQ9PHpSfN6u6/QXkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <meta charset="UTF-8">
+    <title>视频展示</title>
+    <script type="text/JavaScript">
+        function timeRefresh(timeoutPeriod) {
+            var id = setTimeout(
+                function() {
+                    try {
+                    $.get("http://127.0.0.1:7860/check", (data, status) => {
+                        if (data == '1') {
+                            console.log(data);
+                            location.reload(true);
+                        } else {
+                            console.log(data);
+                            timeRefresh(2000);
+                        }
+                    });
+                    } catch (e) {console.log(e);}
+            }, timeoutPeriod);
+            console.log(id);
+        }
+    </script>
+</head>
+<body onLoad="JavaScript:timeRefresh(2000);">
+<video width="800" height="600" autoplay="true">
+  <source src="static/1.mp4" type="video/mp4" />
+</video>
+</body>
+</html>
